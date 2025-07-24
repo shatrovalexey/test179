@@ -33,21 +33,12 @@ SELECT
     `p1`.`title`
     , `c1`.`body`
 FROM
-    (
-        SELECT
-            `c1`.`postId`
-            , `c1`.`id`
-        FROM
-            `comment` AS `c1`
-        WHERE
-            (MATCH(`c1`.`body`) AGAINST(:fts IN BOOLEAN MODE))
-    ) AS `t1`
-
-        INNER JOIN `post` AS `p1`
-            ON (`t1`.`postId` = `p1`.`id`)
+    `post` AS `p1`
 
         INNER JOIN `comment` AS `c1`
-            ON (`t1`.`id` = `c1`.`id`)
+            ON (`p1`.`id` = `c1`.`postId`)
+    WHERE
+        (MATCH(`c1`.`body`) AGAINST(:fts IN BOOLEAN MODE))
 ;
                 '
             ]
