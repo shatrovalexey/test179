@@ -15,8 +15,6 @@ class Request extends Base
     */
     protected function _getResponse(string $url): ?string
     {
-        return file_get_contents('data' . $url . '.json');
-
         $ch = curl_init( "{$this->_config['origin']}{$url}");
         curl_setopt_array($ch, $this->_config['opts']);
 

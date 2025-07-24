@@ -7,3 +7,6 @@
     font-size: 150%;
     font-weight: bold;
 }
+.search-table:not(:has(tbody > tr)) {
+	display: none;
+}
