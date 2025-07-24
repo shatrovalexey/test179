@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Заголовок "Test179"</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/style.css">
+    </head>
+    <body>
+        <form action="/search.php" class="search-form">
+            <fieldset>
+                <legend>форма поиска по тексту комментария</legend>
+                <label>
+                    <span>ярлык поисковой строки</span>
+                    <input type="search" name="q" placeholder="поисковая строка">
+                </label>
+                <label>
+                    <span>кнопка "найти"</span>
+                    <input type="submit" value="&rarr;">
+                </label>
+            </fieldset>
+
+            <table class="search-table">
+                <caption title="результаты поиска"></caption>
+                <thead>
+                    <tr>
+                        <th>заголовок поста</th>
+                        <th>текст комментария</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template>
+                        <tr>
+                            <td data-content="title"></td>
+                            <td>
+                                <p data-content="body">
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </form>
+    </body>
+</html>
+<script src="/js/script.js"></script>
