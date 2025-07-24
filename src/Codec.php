@@ -52,7 +52,7 @@ class Codec extends Base
     *
     * @return ?string
     */
-    public static function getFts(?string $value, string $rx = '{[\w+а-яА-ЯёЁ]{3,}}usx', string $result = '+%s* '): ?string
+    public static function getFts(?string $value, string $rx = '{[\wа-яА-ЯёЁ]{3,}}usx', string $result = '+%s* '): ?string
     {
         return $value && preg_match_all($rx, mb_strtolower($value), $matches)
             ? implode('', array_map(fn (string $word): string => sprintf($result, $word)
