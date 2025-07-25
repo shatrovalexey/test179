@@ -40,14 +40,8 @@ class DBA extends Base
     */
     public function query(string $sql, array $args = []): \PDOStatement
     {
-        try {
-            $sth = $this->dbh()->prepare($sql);
-            $sth->execute($args);
-        } catch(\Throwable $exception) {
-            error_log(print_r([$sql, $args,], true));
-
-            throw $exception;
-        }
+        $sth = $this->dbh()->prepare($sql);
+        $sth->execute($args);
 
         return $sth;
     }
