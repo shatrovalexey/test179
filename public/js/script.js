@@ -31,9 +31,8 @@
                         .forEach(node => node.textContent = item[node.dataset.content]);
 
                     trTpl.after(tr);
-
-                    formSetMsg("done");
                 }))
+                .then(() => formSetMsg("done"))
                 .catch(error => formSetMsg("error", error))
                 .catch(error => {throw error;});
         }
