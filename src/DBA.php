@@ -18,8 +18,7 @@ class DBA extends Base
     */
     public function dbh(): \PDO
     {
-        if (!empty($this->_dbh))
-            return $this->_dbh;
+        if (!empty($this->_dbh)) return $this->_dbh;
 
         $dbh = new \PDO(... array_map(fn (string $key): string => $this->_config[$key], ['dsn', 'user', 'passwd',]));
 

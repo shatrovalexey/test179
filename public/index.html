@@ -7,12 +7,12 @@
         <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-        <form action="/search.php" class="search-form">
+        <form action="/search.php" class="search-form" data-output=".search-table">
             <fieldset>
                 <legend>форма поиска по тексту комментария</legend>
                 <label>
                     <span>ярлык поисковой строки</span>
-                    <input type="search" name="q" placeholder="поисковая строка">
+                    <input type="search" name="q" placeholder="поисковая строка" autofocus>
                 </label>
                 <label>
                     <span>кнопка "найти"</span>
@@ -20,8 +20,19 @@
                 </label>
             </fieldset>
 
-            <table class="search-table">
-                <caption>результаты поиска</caption>
+            <table
+                class="search-table"
+                data-output=".search-table-tpl"
+                data-data=".search-table-tpl ~ .search-table-tr"
+                data-msg=".search-table-msg"
+            >
+                <caption
+                    class="search-table-msg"
+                    data-pending="в процессе"
+                    data-error="ошибка"
+                    data-done="результаты поиска"
+                    data-notfound="не найдено"
+                ></caption>
                 <thead>
                     <tr>
                         <th>заголовок поста</th>
@@ -29,8 +40,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <template>
-                        <tr>
+                    <template class="search-table-tpl">
+                        <tr class="search-table-tr">
                             <td data-content="title"></td>
                             <td>
                                 <p data-content="body">

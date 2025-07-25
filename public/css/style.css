@@ -1,3 +1,6 @@
+.search-table {
+    width: 100%;
+}
 .search-table td {
     border: 1px gray solid;
     border-width: 0 0 1px 1px;
@@ -7,6 +10,6 @@
     font-size: 150%;
     font-weight: bold;
 }
-.search-table:not(:has(tbody > tr)) {
-	display: none;
+.search-table:not(:has(tbody > tr)) thead {
+    display: none;
 }
