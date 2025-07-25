@@ -1,9 +1,11 @@
 (({"document": doc, "location": loc,}) => doc.addEventListener("DOMContentLoaded", evt => {
     const form = doc.querySelector(".search-form");
-    const queryInput = form.querySelector("*[type='search']");
-    const table = form.querySelector(".search-table");
-    const caption = table.querySelector("caption");
-    const trTpl = form.querySelector("tbody > template");
+
+    const [queryInput, table,] = ["*[type='search']", ".search-table",]
+        .map(cssSelector => form.querySelector(cssSelector));
+
+    const [caption, trTpl,] = ["caption", "tbody > template",]
+        .map(cssSelector => table.querySelector(cssSelector));
 
     form.addEventListener("submit", evt => {
         evt.preventDefault();
@@ -27,4 +29,4 @@
 
         return false;
     });
-)})(window);
+}))(window);
