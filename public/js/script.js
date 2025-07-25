@@ -1,7 +1,7 @@
 (({"document": doc, "location": loc,}) => {
     doc.addEventListener("DOMContentLoaded", evt => {
         const form = doc.querySelector(".search-form");
-        const queryInput = form.querySelector("*[name='q']");
+        const queryInput = form.querySelector("*[type='search']");
         const table = form.querySelector(".search-table");
         const caption = table.querySelector("caption");
         const trTpl = form.querySelector("tbody > template");
@@ -9,14 +9,12 @@
         form.addEventListener("submit", evt => {
             evt.preventDefault();
 
-            form.querySelectorAll("tbody > tr").forEach(tr => tr.remove());
+            form.querySelectorAll("tbody > tr")
+                .forEach(tr => tr.remove());
             caption.textContent = "";
 
             const url = new URL(form.getAttribute("action"), loc.origin);
-            const search = new URLSearchParams();
-
-            search.set("q", queryInput.value);
-            url.search = search;
+            url.search = new URLSearchParams(new FormData(form));
 
             fetch(url)
                 .then(data => data.json())
