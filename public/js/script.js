@@ -1,6 +1,4 @@
-(win => {
-    const {"document": doc, "location": loc,} = win;
-
+(({"document": doc, "location": loc,}) => {
     doc.addEventListener("DOMContentLoaded", evt => {
         const form = doc.querySelector(".search-form");
         const queryInput = form.querySelector("*[name='q']");
