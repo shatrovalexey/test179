@@ -5,7 +5,7 @@
     const formUrl = new URL(form.getAttribute("action"), loc.origin);
     const formMsg = table.querySelector(table.dataset.msg);
 
-    const getMsg = (...args) => args.filter(data => data).join(": ");
+    const getMsg = (...args) => args.filter(data => data && String(data).length).join(": ");
     const formGetMsg = (key, error) => getMsg(formMsg.dataset[key], error);
     const formSetMsg = (key, error) => formMsg.textContent = formGetMsg(key, error);
 
