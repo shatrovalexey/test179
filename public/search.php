@@ -10,7 +10,7 @@ $query = Codec::getFts($_REQUEST['q'] ?? null);
 
 echo Codec::getEncodeJson(
     (new DBA($config['dba']))->query(
-        $config['dba']['query']['search'][$query ? 'list' : 'find']
+        $config['dba']['query']['search'][$query ? 'find' : 'list']
             , $query ? [':fts' => $query,] : []
     )->fetchAll(\PDO::FETCH_ASSOC)
 );

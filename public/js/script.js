@@ -1,10 +1,6 @@
 (win => {
     const {"document": doc, "location": loc,} = win;
 
-    String.prototype.capitalize = function() {
-        return this.charAt(0).toUpperCase() + this.substr(1);
-    };
-
     doc.addEventListener("DOMContentLoaded", evt => {
         const form = doc.querySelector(".search-form");
         const queryInput = form.querySelector("*[name='q']");
@@ -16,7 +12,6 @@
             evt.preventDefault();
 
             form.querySelectorAll("tbody > tr").forEach(tr => tr.remove());
-
             caption.textContent = "";
 
             const url = new URL(form.getAttribute("action"), loc.origin);
@@ -36,21 +31,8 @@
                     tr.querySelectorAll("*[data-content]")
                         .forEach(node => node.textContent = item[node.dataset.content]);
 
-                    tr.querySelectorAll("*[data-attr]")
-                        .forEach(node => {
-                            const attrName = node.dataset.attr;
-
-                            if (!attrName || !attrName.length) return;
-
-                            const key = `attr${attrName.capitalize()}`;
-
-                            if (key in node.dataset)
-                                node.setAttribute(attrName, node.dataset[key].replace(/\{(.+?)\}/g, (_, p1) => item[p1]));
-                        });
-
                     trTpl.after(tr);
-                }))
-                .catch(error => caption.textContent = error);
+                }));
 
             return false;
         });
