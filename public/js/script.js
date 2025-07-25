@@ -1,10 +1,12 @@
-(({"document": doc, "location": loc,}) => doc.addEventListener("DOMContentLoaded", evt => {
+(({"document": doc, "location": loc,}) => doc.addEventListener("DOMContentLoaded", () => {
     const form = doc.querySelector(".search-form");
     const table = form.querySelector(form.dataset.output);
     const trTpl = table.querySelector(table.dataset.output);
     const formUrl = new URL(form.getAttribute("action"), loc.origin);
     const formMsg = table.querySelector(table.dataset.msg);
-    const formGetMsg = (key, error) => [formMsg.dataset[key], error,].filter(data => data).join(": ");
+
+    const getMsg = (...args) => args.filter(data => data).join(": ");
+    const formGetMsg = (key, error) => getMsg(formMsg.dataset[key], error);
     const formSetMsg = (key, error) => formMsg.textContent = formGetMsg(key, error);
 
     form.addEventListener("submit", evt => {
@@ -19,9 +21,9 @@
             fetch(formUrl)
                 .then(data => data.json())
                 .then(data => {
-                    if (data.length) return data;
+                    if (!data.length) throw formGetMsg("notfound");
 
-                    throw formGetMsg("notfound");
+                    return data;
                 })
                 .then(data => data.reverse())
                 .then(data => data.forEach(item => {
@@ -31,8 +33,9 @@
                         .forEach(node => node.textContent = item[node.dataset.content]);
 
                     trTpl.after(tr);
+
+                    formSetMsg("done", data.length);
                 }))
-                .then(() => formSetMsg("done"))
                 .catch(error => formSetMsg("error", error))
                 .catch(error => {throw error;});
         }
