@@ -7,10 +7,8 @@ require_once('../vendor/autoload.php');
 $config = require_once('../.config.php');
 
 $query = Codec::getFts($_REQUEST['q'] ?? null);
+$dba = &$config['dba'];
+$search = &$dba['query']['search'];
+$args = $query ? [$search['find'], [':fts' => $query,],] : [$search['list'],];
 
-echo Codec::getEncodeJson(
-    (new DBA($config['dba']))->query(
-        $config['dba']['query']['search'][$query ? 'find' : 'list']
-            , $query ? [':fts' => $query,] : []
-    )->fetchAll(\PDO::FETCH_ASSOC)
-);
+echo Codec::getEncodeJson((new DBA($dba))->query(... $args)->fetchAll(\PDO::FETCH_ASSOC));
