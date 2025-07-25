@@ -22,6 +22,7 @@ class DBA extends Base
             return $this->_dbh;
 
         $dbh = new \PDO(... array_map(fn (string $key): string => $this->_config[$key], ['dsn', 'user', 'passwd',]));
+
         if (!empty($this->_config['charset'])
             && preg_match('{^\w+$}uisx', $this->_config['charset'])) {
             $dbh->query("SET names {$this->_config['charset']}");

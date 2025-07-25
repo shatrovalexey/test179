@@ -11,7 +11,6 @@
 
             form.querySelectorAll("tbody > tr")
                 .forEach(tr => tr.remove());
-            caption.textContent = "";
 
             const url = new URL(form.getAttribute("action"), loc.origin);
             url.search = new URLSearchParams(new FormData(form));
@@ -20,8 +19,6 @@
                 .then(data => data.json())
                 .then(data => data.reverse())
                 .then(data => data.forEach(item => {
-                    caption.textContent = caption.getAttribute("title");
-
                     const tr = trTpl.content.cloneNode(true);
 
                     tr.querySelectorAll("*[data-content]")
