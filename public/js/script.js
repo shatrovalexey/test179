@@ -1,5 +1,5 @@
-(({"document": doc, "location": loc,}) => doc.addEventListener("DOMContentLoaded", () => {
-    const form = doc.querySelector(".search-form");
+(({"document": doc, "location": loc,}, formCssSelector) => doc.addEventListener("DOMContentLoaded", () => {
+    const form = doc.querySelector(formCssSelector);
     const table = form.querySelector(form.dataset.output);
     const trTpl = table.querySelector(table.dataset.output);
     const formUrl = new URL(form.getAttribute("action"), loc.origin);
@@ -42,4 +42,4 @@
 
         return false;
     });
-}))(window);
+}))(window, ".search-form");
